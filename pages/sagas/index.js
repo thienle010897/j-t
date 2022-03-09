@@ -1,30 +1,15 @@
-import { take, takeEvery, takeLatest, 
-  put, all, delay, fork, call 
-} from "redux-saga/effects";
-import { loadNewsError, loadNewsSuccess } from "../actions";
-import * as types from '../constants';
-import {loadNewsApi} from "../api"
+import { call, select } from "redux-saga/effects";
 
-function* onLoadNewsStartAsync () {
-try {
-    const response = yield call(loadNewsApi);
-    if(response.status === 200) {
-        yield delay(500);
-        yield put(loadNewsSuccess(response.data))
-    }
-} catch (error) {
-    yield put(loadNewsError(error.response.data))
-}
-}
+import loginSaga from "./login";
+// import coreSaga from './core';
+import { accessTokenSelector } from "../selectors";
 
-function* onLoadNews () {
-  yield takeEvery(types.LOAD_NEWS_START, onLoadNewsStartAsync)
-}
+export default function* rootSaga() {
+  const accessToken = yield select(accessTokenSelector);
 
+  if (!accessToken) {
+    yield call(loginSaga);
+  }
 
-const newsSaga = [
-fork(onLoadNews)
-]
-export default function* rootSaga () {
-yield all([...newsSaga]);
+  // yield call(coreSaga);
 }

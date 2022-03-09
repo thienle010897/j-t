@@ -1,2 +1,2 @@
-export * from './router';
-export * from './login';
+export { default } from "./router";
+// export * from './login';

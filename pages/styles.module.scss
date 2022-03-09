@@ -1,11 +1,7 @@
 :global {
   #app {
     background: #22252a;
-    .slick-prev {
-      left: 34px;
-      background: red;
-      z-index: 100000;
-  }
+
     .react-datepicker {
       border: 0;
       color: #444444;

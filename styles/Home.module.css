@@ -1,11 +1,7 @@
 .container {
-  /* padding: 0 2rem; */
+  padding: 0 2rem;
 }
-.slick-prev {
-  left: 25px !important;
-  background: red;
-  z-index: 100000;
-}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
